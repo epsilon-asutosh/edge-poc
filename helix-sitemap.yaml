@@ -1,5 +1,6 @@
 sitemaps:
   default:
+    origin: https://www.aemblog.com
     source: /query-index.json
     destination: /sitemap.xml
     lastmod: YYYY-MM-DD
