@@ -1,4 +1,4 @@
-import {toClassName} from '../../scripts/aem.js';
+import { toClassName } from '../../scripts/aem.js';
 
 function createFieldWrapper(fd) {
   const fieldWrapper = document.createElement('div');
@@ -11,7 +11,6 @@ function createFieldWrapper(fd) {
 }
 
 const ids = [];
-
 function generateFieldId(fd, suffix = '') {
   const slug = toClassName(`form-${fd.Name}${suffix}`);
   ids[slug] = ids[slug] || 0;
@@ -49,7 +48,7 @@ const createHeading = (fd) => {
 
   fieldWrapper.append(heading);
 
-  return {field: heading, fieldWrapper};
+  return { field: heading, fieldWrapper };
 };
 
 const createPlaintext = (fd) => {
@@ -61,13 +60,13 @@ const createPlaintext = (fd) => {
 
   fieldWrapper.append(text);
 
-  return {field: text, fieldWrapper};
+  return { field: text, fieldWrapper };
 };
 
 const createSelect = async (fd) => {
   const select = document.createElement('select');
   setCommonAttributes(select, fd);
-  const addOption = ({text, value}) => {
+  const addOption = ({ text, value }) => {
     const option = document.createElement('option');
     option.text = text.trim();
     option.value = value.trim();
@@ -79,7 +78,7 @@ const createSelect = async (fd) => {
   };
 
   if (fd.Placeholder) {
-    const ph = addOption({text: fd.Placeholder, value: ''});
+    const ph = addOption({ text: fd.Placeholder, value: '' });
     ph.setAttribute('disabled', '');
   }
 
@@ -109,7 +108,7 @@ const createSelect = async (fd) => {
   fieldWrapper.append(select);
   fieldWrapper.prepend(createLabel(fd));
 
-  return {field: select, fieldWrapper};
+  return { field: select, fieldWrapper };
 };
 
 const createConfirmation = (fd, form) => {
@@ -126,7 +125,7 @@ const createSubmit = (fd) => {
 
   const fieldWrapper = createFieldWrapper(fd);
   fieldWrapper.append(button);
-  return {field: button, fieldWrapper};
+  return { field: button, fieldWrapper };
 };
 
 const createTextArea = (fd) => {
@@ -139,7 +138,7 @@ const createTextArea = (fd) => {
   fieldWrapper.append(field);
   fieldWrapper.prepend(label);
 
-  return {field, fieldWrapper};
+  return { field, fieldWrapper };
 };
 
 const createInput = (fd) => {
@@ -157,7 +156,7 @@ const createInput = (fd) => {
     fieldWrapper.prepend(label);
   }
 
-  return {field, fieldWrapper};
+  return { field, fieldWrapper };
 };
 
 const createFieldset = (fd) => {
@@ -173,11 +172,11 @@ const createFieldset = (fd) => {
   const fieldWrapper = createFieldWrapper(fd);
   fieldWrapper.append(field);
 
-  return {field, fieldWrapper};
+  return { field, fieldWrapper };
 };
 
 const createToggle = (fd) => {
-  const {field, fieldWrapper} = createInput(fd);
+  const { field, fieldWrapper } = createInput(fd);
   field.type = 'checkbox';
   if (!field.value) field.value = 'on';
   field.classList.add('toggle');
@@ -195,23 +194,23 @@ const createToggle = (fd) => {
     field.checked = !field.checked;
   });
 
-  return {field, fieldWrapper};
+  return { field, fieldWrapper };
 };
 
 const createCheckbox = (fd) => {
-  const {field, fieldWrapper} = createInput(fd);
+  const { field, fieldWrapper } = createInput(fd);
   if (!field.value) field.value = 'checked';
   fieldWrapper.classList.add('selection-wrapper');
 
-  return {field, fieldWrapper};
+  return { field, fieldWrapper };
 };
 
 const createRadio = (fd) => {
-  const {field, fieldWrapper} = createInput(fd);
+  const { field, fieldWrapper } = createInput(fd);
   if (!field.value) field.value = fd.Label || 'on';
   fieldWrapper.classList.add('selection-wrapper');
 
-  return {field, fieldWrapper};
+  return { field, fieldWrapper };
 };
 
 const FIELD_CREATOR_FUNCTIONS = {
